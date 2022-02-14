@@ -36,12 +36,12 @@ namespace Tennis
             }
             else if (_score1 >= 4 || _score2 >= 4)
             {
-                var minusResult = _score1 - _score2;
-                score = minusResult switch
+                var margin = _score1 - _score2;
+                score = margin switch
                 {
                     1 => $"Advantage {_player1Name}",
                     -1 => $"Advantage {_player2Name}",
-                    _ => minusResult >= 2 ? $"Win for {_player1Name}" : $"Win for {_player2Name}"
+                    _ => margin >= 2 ? $"Win for {_player1Name}" : $"Win for {_player2Name}"
                 };
             }
             else
@@ -49,8 +49,16 @@ namespace Tennis
                 for (var i = 1; i < 3; i++)
                 {
                     int tempScore;
-                    if (i == 1) tempScore = _score1;
-                    else { score += "-"; tempScore = _score2; }
+                    
+                    if (i == 1)
+                    {
+                        tempScore = _score1;
+                    }
+                    else
+                    {
+                        score += "-"; tempScore = _score2;
+                    }
+                    
                     switch (tempScore)
                     {
                         case 0:

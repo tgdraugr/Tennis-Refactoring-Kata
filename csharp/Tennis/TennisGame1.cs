@@ -4,8 +4,8 @@ namespace Tennis
     {
         private int _score1 = 0;
         private int _score2 = 0;
-        private string _player1Name;
-        private string _player2Name;
+        private readonly string _player1Name;
+        private readonly string _player2Name;
 
         public TennisGame1(string player1Name, string player2Name)
         {
@@ -15,7 +15,7 @@ namespace Tennis
 
         public void WonPoint(string playerName)
         {
-            if (playerName == "player1")
+            if (playerName == _player1Name)
                 _score1 += 1;
             else
                 _score2 += 1;
@@ -39,9 +39,9 @@ namespace Tennis
                 var minusResult = _score1 - _score2;
                 score = minusResult switch
                 {
-                    1 => "Advantage player1",
-                    -1 => "Advantage player2",
-                    _ => minusResult >= 2 ? "Win for player1" : "Win for player2"
+                    1 => $"Advantage {_player1Name}",
+                    -1 => $"Advantage {_player2Name}",
+                    _ => minusResult >= 2 ? $"Win for {_player1Name}" : $"Win for {_player2Name}"
                 };
             }
             else
@@ -72,4 +72,3 @@ namespace Tennis
         }
     }
 }
-

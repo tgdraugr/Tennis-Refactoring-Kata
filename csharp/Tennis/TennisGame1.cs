@@ -1,7 +1,18 @@
+using System.Collections.Generic;
+
 namespace Tennis
 {
     public class TennisGame1 : ITennisGame
     {
+        private static readonly Dictionary<int, string> DesignationByScore =
+            new Dictionary<int, string>
+            {
+                { 0, "Love" },
+                { 1, "Fifteen" },
+                { 2, "Thirty" },
+                { 3, "Forty" }
+            };
+        
         private int _score1;
         private int _score2;
         private readonly string _player1Name;
@@ -27,14 +38,14 @@ namespace Tennis
             {
                 return _score1 switch
                 {
-                    0 => "Love-All",
-                    1 => "Fifteen-All",
-                    2 => "Thirty-All",
+                    0 => $"{DesignationByScore[_score1]}-All",
+                    1 => $"{DesignationByScore[_score1]}-All",
+                    2 => $"{DesignationByScore[_score1]}-All",
                     _ => "Deuce"
                 };
             }
             
-            if (_score1 >= 4 || _score2 >= 4)
+            if (_score1 > 3 || _score2 > 3)
             {
                 var margin = _score1 - _score2;
                 return margin switch
@@ -45,19 +56,7 @@ namespace Tennis
                 };
             }
             
-            return GetDesignation(_score1) + "-" + GetDesignation(_score2);
-        }
-
-        private static string GetDesignation(int score)
-        {
-            return score switch
-            {
-                0 => "Love",
-                1 => "Fifteen",
-                2 => "Thirty",
-                3 => "Forty",
-                _ => ""
-            };
+            return DesignationByScore[_score1] + "-" + DesignationByScore[_score2];
         }
     }
 }

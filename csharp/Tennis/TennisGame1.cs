@@ -38,18 +38,12 @@ namespace Tennis
         {
             if (_score1 == _score2)
             {
-                return _score1 switch
-                {
-                    0 => $"{DesignationByScore[_score1]}-All",
-                    1 => $"{DesignationByScore[_score1]}-All",
-                    2 => $"{DesignationByScore[_score1]}-All",
-                    _ => "Deuce"
-                };
+                return GetTieScore();
             }
 
             if (AtLeastThreePointsScored())
             {
-                return GetScoreWithAdvantage((_score1 - _score2));
+                return GetScoreWithAdvantage(_score1 - _score2);
             }
             
             return DesignationByScore[_score1] + "-" + DesignationByScore[_score2];
@@ -58,6 +52,17 @@ namespace Tennis
         private bool AtLeastThreePointsScored()
         {
             return _score1 > MinPointsToWin || _score2 > MinPointsToWin;
+        }
+
+        private string GetTieScore()
+        {
+            return _score1 switch
+            {
+                0 => $"{DesignationByScore[_score1]}-All",
+                1 => $"{DesignationByScore[_score1]}-All",
+                2 => $"{DesignationByScore[_score1]}-All",
+                _ => "Deuce"
+            };
         }
 
         private string GetScoreWithAdvantage(int margin)

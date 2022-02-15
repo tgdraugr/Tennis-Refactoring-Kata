@@ -23,10 +23,9 @@ namespace Tennis
 
         public string GetScore()
         {
-            var score = "";
             if (_score1 == _score2)
             {
-                score = _score1 switch
+                return _score1 switch
                 {
                     0 => "Love-All",
                     1 => "Fifteen-All",
@@ -34,21 +33,19 @@ namespace Tennis
                     _ => "Deuce"
                 };
             }
-            else if (_score1 >= 4 || _score2 >= 4)
+            
+            if (_score1 >= 4 || _score2 >= 4)
             {
                 var margin = _score1 - _score2;
-                score = margin switch
+                return margin switch
                 {
                     1 => $"Advantage {_player1Name}",
                     -1 => $"Advantage {_player2Name}",
                     _ => margin >= 2 ? $"Win for {_player1Name}" : $"Win for {_player2Name}"
                 };
             }
-            else
-            {
-                return GetDesignation(_score1) + "-" + GetDesignation(_score2);
-            }
-            return score;
+            
+            return GetDesignation(_score1) + "-" + GetDesignation(_score2);
         }
 
         private static string GetDesignation(int score)

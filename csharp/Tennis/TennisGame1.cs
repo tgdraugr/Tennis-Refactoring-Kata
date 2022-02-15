@@ -46,37 +46,21 @@ namespace Tennis
             }
             else
             {
-                for (var i = 1; i < 3; i++)
-                {
-                    int tempScore;
-                    
-                    if (i == 1)
-                    {
-                        tempScore = _score1;
-                    }
-                    else
-                    {
-                        score += "-"; tempScore = _score2;
-                    }
-                    
-                    switch (tempScore)
-                    {
-                        case 0:
-                            score += "Love";
-                            break;
-                        case 1:
-                            score += "Fifteen";
-                            break;
-                        case 2:
-                            score += "Thirty";
-                            break;
-                        case 3:
-                            score += "Forty";
-                            break;
-                    }
-                }
+                return GetDesignation(_score1) + "-" + GetDesignation(_score2);
             }
             return score;
+        }
+
+        private static string GetDesignation(int score)
+        {
+            return score switch
+            {
+                0 => "Love",
+                1 => "Fifteen",
+                2 => "Thirty",
+                3 => "Forty",
+                _ => ""
+            };
         }
     }
 }

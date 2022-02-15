@@ -46,19 +46,28 @@ namespace Tennis
                     _ => "Deuce"
                 };
             }
-            
-            if (_score1 > MinPointsToWin || _score2 > MinPointsToWin)
+
+            if (AtLeastThreePointsScored())
             {
-                var margin = _score1 - _score2;
-                return margin switch
-                {
-                    1 => $"Advantage {_player1Name}",
-                    -1 => $"Advantage {_player2Name}",
-                    _ => margin >= 2 ? $"Win for {_player1Name}" : $"Win for {_player2Name}"
-                };
+                return GetScoreWithAdvantage((_score1 - _score2));
             }
             
             return DesignationByScore[_score1] + "-" + DesignationByScore[_score2];
+        }
+
+        private bool AtLeastThreePointsScored()
+        {
+            return _score1 > MinPointsToWin || _score2 > MinPointsToWin;
+        }
+
+        private string GetScoreWithAdvantage(int margin)
+        {
+            return margin switch
+            {
+                1 => $"Advantage {_player1Name}",
+                -1 => $"Advantage {_player2Name}",
+                _ => margin >= 2 ? $"Win for {_player1Name}" : $"Win for {_player2Name}"
+            };
         }
     }
 }

@@ -4,6 +4,8 @@ namespace Tennis
 {
     public class TennisGame1 : ITennisGame
     {
+        private const int MinPointsToWin = 3;
+
         private static readonly Dictionary<int, string> DesignationByScore =
             new Dictionary<int, string>
             {
@@ -45,7 +47,7 @@ namespace Tennis
                 };
             }
             
-            if (_score1 > 3 || _score2 > 3)
+            if (_score1 > MinPointsToWin || _score2 > MinPointsToWin)
             {
                 var margin = _score1 - _score2;
                 return margin switch

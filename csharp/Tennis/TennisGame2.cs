@@ -5,8 +5,6 @@ namespace Tennis
         private int _p1Point;
         private int _p2Point;
 
-        private string _p1Res = "";
-        private string _p2Res = "";
         private readonly string _player1Name;
         private readonly string _player2Name;
 
@@ -43,22 +41,10 @@ namespace Tennis
 
             var score = "";
 
-            if (_p1Point > 0 && _p2Point == 0)
-            {
-                score = GetDesignationFrom(_p1Point) + "-" + GetDesignationFrom(_p2Point);
-            }
-            
-            if (_p2Point > 0 && _p1Point == 0)
-            {
-                score = GetDesignationFrom(_p1Point) + "-" + GetDesignationFrom(_p2Point);
-            }
-
-            if (_p1Point > _p2Point && _p1Point < 4)
-            {
-                score = GetDesignationFrom(_p1Point) + "-" + GetDesignationFrom(_p2Point);
-            }
-            
-            if (_p2Point > _p1Point && _p2Point < 4)
+            if (_p1Point > 0 && _p2Point == 0 || 
+                _p2Point > 0 && _p1Point == 0 || 
+                _p1Point > _p2Point && _p1Point < 4 ||
+                _p2Point > _p1Point && _p2Point < 4)
             {
                 score = GetDesignationFrom(_p1Point) + "-" + GetDesignationFrom(_p2Point);
             }

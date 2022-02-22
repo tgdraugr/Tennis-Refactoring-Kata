@@ -39,6 +39,7 @@ namespace Tennis
                 };
                 score += "-All";
             }
+            
             if (_p1Point == _p2Point && _p1Point > 2)
                 score = "Deuce";
 
@@ -55,6 +56,7 @@ namespace Tennis
                 _p2Res = "Love";
                 score = _p1Res + "-" + _p2Res;
             }
+            
             if (_p2Point > 0 && _p1Point == 0)
             {
                 _p2Res = _p2Point switch
@@ -85,6 +87,7 @@ namespace Tennis
                 };
                 score = _p1Res + "-" + _p2Res;
             }
+            
             if (_p2Point > _p1Point && _p2Point < 4)
             {
                 _p2Res = _p2Point switch
@@ -116,10 +119,12 @@ namespace Tennis
             {
                 score = $"Win for {_player1Name}";
             }
+            
             if (_p2Point >= 4 && _p1Point >= 0 && (_p2Point - _p1Point) >= 2)
             {
                 score = $"Win for {_player2Name}";
             }
+            
             return score;
         }
     }

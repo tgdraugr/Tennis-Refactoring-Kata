@@ -33,28 +33,29 @@ namespace Tennis
                 
                 return GetDesignationFrom(_p1Point) + "-All";
             }
-
-            if (_p1Point >= 4 && _p2Point >= 0 && (_p1Point - _p2Point) >= 2)
+            
+            if (_p1Point >= 4 && PlayerOneScoredTwoMorePointsThanOpponent() || 
+                _p2Point >= 4 && PlayerTwoScoredTwoMorePointsThanOpponent())
             {
-                return $"Win for {_player1Name}";
+                return (_p1Point - _p2Point) >= 2 ? $"Win for {_player1Name}" : $"Win for {_player2Name}";
             }
             
-            if (_p2Point >= 4 && _p1Point >= 0 && (_p2Point - _p1Point) >= 2)
+            if (_p1Point > _p2Point && _p2Point >= 3 || _p2Point > _p1Point && _p1Point >= 3)
             {
-                return $"Win for {_player2Name}";
-            }
-
-            if (_p1Point > _p2Point && _p2Point >= 3)
-            {
-                return $"Advantage {_player1Name}";
-            }
-
-            if (_p2Point > _p1Point && _p1Point >= 3)
-            {
-                return $"Advantage {_player2Name}";
+                return _p1Point > _p2Point ? $"Advantage {_player1Name}" : $"Advantage {_player2Name}";
             }
             
             return GetDesignationFrom(_p1Point) + "-" + GetDesignationFrom(_p2Point);
+        }
+
+        private bool PlayerTwoScoredTwoMorePointsThanOpponent()
+        {
+            return _p2Point - _p1Point >= 2;
+        }
+
+        private bool PlayerOneScoredTwoMorePointsThanOpponent()
+        {
+            return _p1Point - _p2Point >= 2;
         }
 
         private static string GetDesignationFrom(int score)

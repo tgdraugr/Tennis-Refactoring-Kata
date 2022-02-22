@@ -27,8 +27,11 @@ namespace Tennis
 
         public string GetScore()
         {
-            if (_p1Point == _p2Point && _p1Point < 3)
+            if (_p1Point == _p2Point)
             {
+                if (_p1Point >= 3)
+                    return "Deuce";
+                
                 return _p1Point switch
                 {
                     0 => "Love",
@@ -38,71 +41,26 @@ namespace Tennis
                 } + "-All";
             }
 
-            if (_p1Point == _p2Point && _p1Point > 2)
-                return "Deuce";
-            
             var score = "";
 
             if (_p1Point > 0 && _p2Point == 0)
             {
-                _p1Res = _p1Point switch
-                {
-                    1 => "Fifteen",
-                    2 => "Thirty",
-                    3 => "Forty",
-                    _ => _p1Res
-                };
-
-                _p2Res = "Love";
-                score = _p1Res + "-" + _p2Res;
+                score = GetDesignationFrom(_p1Point) + "-" + GetDesignationFrom(_p2Point);
             }
             
             if (_p2Point > 0 && _p1Point == 0)
             {
-                _p2Res = _p2Point switch
-                {
-                    1 => "Fifteen",
-                    2 => "Thirty",
-                    3 => "Forty",
-                    _ => _p2Res
-                };
-
-                _p1Res = "Love";
-                score = _p1Res + "-" + _p2Res;
+                score = GetDesignationFrom(_p1Point) + "-" + GetDesignationFrom(_p2Point);
             }
 
             if (_p1Point > _p2Point && _p1Point < 4)
             {
-                _p1Res = _p1Point switch
-                {
-                    2 => "Thirty",
-                    3 => "Forty",
-                    _ => _p1Res
-                };
-                _p2Res = _p2Point switch
-                {
-                    1 => "Fifteen",
-                    2 => "Thirty",
-                    _ => _p2Res
-                };
-                score = _p1Res + "-" + _p2Res;
+                score = GetDesignationFrom(_p1Point) + "-" + GetDesignationFrom(_p2Point);
             }
             
             if (_p2Point > _p1Point && _p2Point < 4)
             {
-                _p2Res = _p2Point switch
-                {
-                    2 => "Thirty",
-                    3 => "Forty",
-                    _ => _p2Res
-                };
-                _p1Res = _p1Point switch
-                {
-                    1 => "Fifteen",
-                    2 => "Thirty",
-                    _ => _p1Res
-                };
-                score = _p1Res + "-" + _p2Res;
+                score = GetDesignationFrom(_p1Point) + "-" + GetDesignationFrom(_p2Point);
             }
 
             if (_p1Point > _p2Point && _p2Point >= 3)
@@ -127,6 +85,17 @@ namespace Tennis
             
             return score;
         }
+
+        private static string GetDesignationFrom(int score)
+        {
+            return score switch
+            {
+                0 => "Love",
+                1 => "Fifteen",
+                2 => "Thirty",
+                3 => "Forty",
+                _ => ""
+            };
+        }
     }
 }
-

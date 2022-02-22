@@ -36,10 +36,7 @@ namespace Tennis
 
             var score = "";
 
-            if (_p1Point > 0 && _p2Point == 0 || 
-                _p2Point > 0 && _p1Point == 0 || 
-                _p1Point > _p2Point && _p1Point < 4 ||
-                _p2Point > _p1Point && _p2Point < 4)
+            if (IsRunningGame())
             {
                 score = GetDesignationFrom(_p1Point) + "-" + GetDesignationFrom(_p2Point);
             }
@@ -65,6 +62,14 @@ namespace Tennis
             }
             
             return score;
+        }
+
+        private bool IsRunningGame()
+        {
+            return _p1Point > 0 && _p2Point == 0 || 
+                   _p2Point > 0 && _p1Point == 0 || 
+                   _p1Point > _p2Point && _p1Point < 4 ||
+                   _p2Point > _p1Point && _p2Point < 4;
         }
 
         private static string GetDesignationFrom(int score)

@@ -34,42 +34,27 @@ namespace Tennis
                 return GetDesignationFrom(_p1Point) + "-All";
             }
 
-            var score = "";
-
-            if (IsRunningGame())
-            {
-                score = GetDesignationFrom(_p1Point) + "-" + GetDesignationFrom(_p2Point);
-            }
-
-            if (_p1Point > _p2Point && _p2Point >= 3)
-            {
-                score = $"Advantage {_player1Name}";
-            }
-
-            if (_p2Point > _p1Point && _p1Point >= 3)
-            {
-                score = $"Advantage {_player2Name}";
-            }
-
             if (_p1Point >= 4 && _p2Point >= 0 && (_p1Point - _p2Point) >= 2)
             {
-                score = $"Win for {_player1Name}";
+                return $"Win for {_player1Name}";
             }
             
             if (_p2Point >= 4 && _p1Point >= 0 && (_p2Point - _p1Point) >= 2)
             {
-                score = $"Win for {_player2Name}";
+                return $"Win for {_player2Name}";
+            }
+
+            if (_p1Point > _p2Point && _p2Point >= 3)
+            {
+                return $"Advantage {_player1Name}";
+            }
+
+            if (_p2Point > _p1Point && _p1Point >= 3)
+            {
+                return $"Advantage {_player2Name}";
             }
             
-            return score;
-        }
-
-        private bool IsRunningGame()
-        {
-            return _p1Point > 0 && _p2Point == 0 || 
-                   _p2Point > 0 && _p1Point == 0 || 
-                   _p1Point > _p2Point && _p1Point < 4 ||
-                   _p2Point > _p1Point && _p2Point < 4;
+            return GetDesignationFrom(_p1Point) + "-" + GetDesignationFrom(_p2Point);
         }
 
         private static string GetDesignationFrom(int score)

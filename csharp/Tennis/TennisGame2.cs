@@ -30,12 +30,13 @@ namespace Tennis
             var score = "";
             if (_p1Point == _p2Point && _p1Point < 3)
             {
-                if (_p1Point == 0)
-                    score = "Love";
-                if (_p1Point == 1)
-                    score = "Fifteen";
-                if (_p1Point == 2)
-                    score = "Thirty";
+                score = _p1Point switch
+                {
+                    0 => "Love",
+                    1 => "Fifteen",
+                    2 => "Thirty",
+                    _ => score
+                };
                 score += "-All";
             }
             if (_p1Point == _p2Point && _p1Point > 2)
@@ -43,24 +44,26 @@ namespace Tennis
 
             if (_p1Point > 0 && _p2Point == 0)
             {
-                if (_p1Point == 1)
-                    _p1Res = "Fifteen";
-                if (_p1Point == 2)
-                    _p1Res = "Thirty";
-                if (_p1Point == 3)
-                    _p1Res = "Forty";
+                _p1Res = _p1Point switch
+                {
+                    1 => "Fifteen",
+                    2 => "Thirty",
+                    3 => "Forty",
+                    _ => _p1Res
+                };
 
                 _p2Res = "Love";
                 score = _p1Res + "-" + _p2Res;
             }
             if (_p2Point > 0 && _p1Point == 0)
             {
-                if (_p2Point == 1)
-                    _p2Res = "Fifteen";
-                if (_p2Point == 2)
-                    _p2Res = "Thirty";
-                if (_p2Point == 3)
-                    _p2Res = "Forty";
+                _p2Res = _p2Point switch
+                {
+                    1 => "Fifteen",
+                    2 => "Thirty",
+                    3 => "Forty",
+                    _ => _p2Res
+                };
 
                 _p1Res = "Love";
                 score = _p1Res + "-" + _p2Res;
@@ -68,26 +71,34 @@ namespace Tennis
 
             if (_p1Point > _p2Point && _p1Point < 4)
             {
-                if (_p1Point == 2)
-                    _p1Res = "Thirty";
-                if (_p1Point == 3)
-                    _p1Res = "Forty";
-                if (_p2Point == 1)
-                    _p2Res = "Fifteen";
-                if (_p2Point == 2)
-                    _p2Res = "Thirty";
+                _p1Res = _p1Point switch
+                {
+                    2 => "Thirty",
+                    3 => "Forty",
+                    _ => _p1Res
+                };
+                _p2Res = _p2Point switch
+                {
+                    1 => "Fifteen",
+                    2 => "Thirty",
+                    _ => _p2Res
+                };
                 score = _p1Res + "-" + _p2Res;
             }
             if (_p2Point > _p1Point && _p2Point < 4)
             {
-                if (_p2Point == 2)
-                    _p2Res = "Thirty";
-                if (_p2Point == 3)
-                    _p2Res = "Forty";
-                if (_p1Point == 1)
-                    _p1Res = "Fifteen";
-                if (_p1Point == 2)
-                    _p1Res = "Thirty";
+                _p2Res = _p2Point switch
+                {
+                    2 => "Thirty",
+                    3 => "Forty",
+                    _ => _p2Res
+                };
+                _p1Res = _p1Point switch
+                {
+                    1 => "Fifteen",
+                    2 => "Thirty",
+                    _ => _p1Res
+                };
                 score = _p1Res + "-" + _p2Res;
             }
 

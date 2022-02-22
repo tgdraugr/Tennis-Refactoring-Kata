@@ -5,6 +5,7 @@ namespace Tennis
         private int _p1Point;
         private int _p2Point;
 
+        private string _p2Res = "";
         private readonly string _player1Name;
         private readonly string _player2Name;
 
@@ -30,13 +31,7 @@ namespace Tennis
                 if (_p1Point >= 3)
                     return "Deuce";
                 
-                return _p1Point switch
-                {
-                    0 => "Love",
-                    1 => "Fifteen",
-                    2 => "Thirty",
-                    _ => ""
-                } + "-All";
+                return GetDesignationFrom(_p1Point) + "-All";
             }
 
             var score = "";

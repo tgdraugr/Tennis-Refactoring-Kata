@@ -27,21 +27,21 @@ namespace Tennis
 
         public string GetScore()
         {
-            var score = "";
             if (_p1Point == _p2Point && _p1Point < 3)
             {
-                score = _p1Point switch
+                return _p1Point switch
                 {
                     0 => "Love",
                     1 => "Fifteen",
                     2 => "Thirty",
-                    _ => score
-                };
-                score += "-All";
+                    _ => ""
+                } + "-All";
             }
-            
+
             if (_p1Point == _p2Point && _p1Point > 2)
-                score = "Deuce";
+                return "Deuce";
+            
+            var score = "";
 
             if (_p1Point > 0 && _p2Point == 0)
             {

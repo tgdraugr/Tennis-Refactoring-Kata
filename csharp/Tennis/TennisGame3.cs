@@ -27,9 +27,15 @@ namespace Tennis
             if (_player1Points == _player2Points)
                 return "Deuce";
 
-            return (_player1Points - _player2Points) * (_player1Points - _player2Points) == 1 ? 
+            return IsAdvantage() ? 
                 "Advantage " + GetPlayerNameInAdvantage() : 
                 "Win for " + GetPlayerNameInAdvantage();
+        }
+
+        private bool IsAdvantage()
+        {
+            var pointsDiff = _player1Points - _player2Points;
+            return pointsDiff * pointsDiff == 1;
         }
 
         private string GetPlayerNameInAdvantage()
@@ -46,4 +52,3 @@ namespace Tennis
         }
     }
 }
-

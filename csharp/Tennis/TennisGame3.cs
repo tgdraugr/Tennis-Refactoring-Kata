@@ -17,7 +17,7 @@ namespace Tennis
 
         public string GetScore()
         {
-            if (_player1Points < 4 && _player2Points < 4 && _player1Points + _player2Points < 6)
+            if (NoPlayerScoredFourPoints() && _player1Points + _player2Points < 6)
             {
                 return _player1Points == _player2Points ? 
                     PossibleScores[_player1Points] + "-All" : 
@@ -30,6 +30,11 @@ namespace Tennis
             return IsAdvantage() ? 
                 "Advantage " + GetPlayerNameInAdvantage() : 
                 "Win for " + GetPlayerNameInAdvantage();
+        }
+
+        private bool NoPlayerScoredFourPoints()
+        {
+            return _player1Points < 4 && _player2Points < 4;
         }
 
         private bool IsAdvantage()

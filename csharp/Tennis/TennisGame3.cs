@@ -17,20 +17,24 @@ namespace Tennis
 
         public string GetScore()
         {
-            if ((_player1Points < 4 && _player2Points < 4) && (_player1Points + _player2Points < 6))
+            if (_player1Points < 4 && _player2Points < 4 && _player1Points + _player2Points < 6)
             {
-                return (_player1Points == _player2Points) ? 
+                return _player1Points == _player2Points ? 
                     PossibleScores[_player1Points] + "-All" : 
                     PossibleScores[_player1Points] + "-" + PossibleScores[_player2Points];
             }
 
             if (_player1Points == _player2Points)
                 return "Deuce";
-            
-            var translatedScore = _player1Points > _player2Points ? _player1Name : _player2Name;
-            return ((_player1Points - _player2Points) * (_player1Points - _player2Points) == 1) ? 
-                "Advantage " + translatedScore : 
-                "Win for " + translatedScore;
+
+            return (_player1Points - _player2Points) * (_player1Points - _player2Points) == 1 ? 
+                "Advantage " + GetPlayerNameInAdvantage() : 
+                "Win for " + GetPlayerNameInAdvantage();
+        }
+
+        private string GetPlayerNameInAdvantage()
+        {
+            return _player1Points > _player2Points ? _player1Name : _player2Name;
         }
 
         public void WonPoint(string playerName)
